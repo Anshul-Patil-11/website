@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anshul Patil — Software Developer</title>
+  <title>Anshul Patil, Software Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -12,16 +12,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0a0a0c;
+      --bg:        #030009;
       --bg2:       #111116;
       --bg3:       #16161d;
       --border:    rgba(255,255,255,0.07);
-      --accent:    #00e5ff;
-      --accent2:   #7c3aed;
+      --accent:    #00e5ff; /*#00e5ff;*/ 
+      --accent2:   #ed3aa8;
       --gold:      #f59e0b;
       --text:      #e8e8f0;
       --muted:     #7070a0;
-      --card:      rgba(255,255,255,0.03);
+      --card:      rgba(6, 2, 38, 0.03);
       --glow:      rgba(0,229,255,0.15);
       --font-head: 'Syne', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -149,6 +149,46 @@
     }
 
     .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+    /* Hero two-column layout: text (left) + photo (right) */
+    .hero-inner {
+      position: relative; z-index: 1;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;   /* text column a bit wider than photo */
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-photo {
+      display: flex; justify-content: center;
+      align-self: start;     /* align to the TOP of the row (next to the title) instead of centering */
+      margin-top: 2rem;      /* slide it down to line up with the h1 — tweak this number to taste */
+    }
+    .hero-photo-frame {
+      position: relative;
+      width: 100%; max-width: 340px;
+      aspect-ratio: 1 / 1;                   /* square box → needed for a perfect circle */
+      border-radius: 50%;                    /* 50% on a square = full circle */
+      border: 1px solid var(--border);
+      background: var(--card);
+      overflow: hidden;                      /* clips the photo to the rounded corners */
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 70px var(--glow);      /* finally using --glow :) */
+    }
+    .hero-photo-frame img {
+      position: absolute; inset: 0;          /* fills the frame, sitting over the label */
+      width: 100%; height: 100%;
+      object-fit: cover;                     /* crop to fill instead of squashing */
+    }
+    .hero-photo-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.9;
+      padding: 1rem;
+    }
+    .hero-photo-label code { color: var(--accent); }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 0.5rem;
       font-family: var(--font-mono);
@@ -729,6 +769,9 @@
       .hamburger { display: flex; }
       section { padding: 4rem 1.5rem; }
       #hero { padding: 6rem 1.5rem 3rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }  /* stack: text then photo */
+      .hero-photo { justify-content: flex-start; }
+      .hero-photo-frame { max-width: 260px; }
       .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .skills-grid, .projects-grid { grid-template-columns: 1fr; }
       .certs-grid { grid-template-columns: 1fr; }
@@ -770,8 +813,9 @@
   <section id="hero">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
+    <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-badge">Available for new roles</div>
+      <div class="hero-badge">Based in Dublin, Ireland · Available for new roles</div>
       <h1 class="hero-title">
         Anshul
         <span class="accent-line">Patil</span>
@@ -779,7 +823,7 @@
       </h1>
       <p class="hero-tagline">
         Computer Engineering graduate from <strong>Trinity College Dublin</strong> building
-        production-grade backends with Python, FastAPI, and LLM-driven pipelines.
+        production-grade backends with <strong>Python</strong>, <strong>FastAPI</strong>, and <strong>LLM-driven</strong> pipelines.
         Currently shipping real systems at <strong>TestQ Technologies</strong>, Dublin-based, open to what's next.
       </p>
       <div class="hero-buttons">
@@ -788,7 +832,7 @@
       </div>
       <div class="hero-stats">
         <div class="stat-item">
-          <span class="stat-num">1+</span>
+          <span class="stat-num">1</span>
           <span class="stat-label">Years Experience</span>
         </div>
         <div class="stat-item">
@@ -800,15 +844,27 @@
           <span class="stat-label">Springer Publication</span>
         </div>
         <div class="stat-item">
-          <span class="stat-num">5x</span>
+          <span class="stat-num">95%</span>
           <span class="stat-label">Cost Saving at TestQ</span>
         </div>
       </div>
     </div>
-    <div class="scroll-indicator">
+
+      <div class="hero-photo reveal reveal-delay-1">
+        <div class="hero-photo-frame">
+          <!-- Replace photo.jpg with your image file (put it next to index.html).
+               If the file is missing, the label below shows instead. -->
+          <img src="Anshul_Formal_Photo.jpeg" alt="Anshul Patil"
+               onerror="this.style.display='none'" />
+          <span class="hero-photo-label">Your photo here<br><code>photo.jpg</code></span>
+        </div>
+      </div>
+
+    </div>
+    <!-- <div class="scroll-indicator">
       <span>scroll</span>
       <div class="scroll-line"></div>
-    </div>
+    </div> -->
   </section>
 
   <!-- ABOUT -->
@@ -818,19 +874,20 @@
       <h2 class="section-title">Who I am</h2>
       <div class="about-grid">
         <div class="about-text reveal">
-          <p>I am a recent Computer Engineering graduate from <strong>Trinity College Dublin</strong> (Class of 2025), currently working remotely as a Software Developer at TestQ Technologies in the UK. I build backends that actually ship — not just prototypes.</p>
-          <p>At TestQ, I designed and delivered <strong>PRANCER</strong>, a full LLM-powered resume-parsing platform from scratch — handling architecture, cloud deployment on AWS, authentication, CI/CD, and the frontend. It replaced a paid third-party service at 5% of the cost with 3x the throughput.</p>
-          <p>I enjoy working close to the problem, picking up new tools fast, and working well in a team. Outside of code I play badminton, do some climbing, follow football, and won a district bronze in athletics at one point. I also published a research paper at an international Springer conference during my final year.</p>
+          <p>I am a recent <strong>Computer Engineering</strong> graduate from <strong>Trinity College Dublin</strong> (Class of 2025), currently working remotely as a <strong>Software Developer</strong> at <strong>TestQ Technologies</strong> in the UK. I build <strong>backends</strong> that actually ship, not just prototypes.</p>
+          <p>At TestQ, I designed and delivered <strong>PRANCER</strong>, a full <strong>LLM-powered</strong> resume-parsing platform from scratch, handling architecture, <strong>cloud deployment on AWS</strong>, authentication, and the frontend. It replaced a paid third-party service at <strong>5% of the cost</strong> with <strong>3x the throughput</strong>.</p>
+          <p>I enjoy working close to the problem, picking up new tools fast, and working well in a team. Outside of code I play badminton, do some climbing, follow football, and won a district bronze in athletics at one point. I also published a <strong>research paper at an international Springer conference</strong> in my second year.</p>
           <div class="highlight-box">
-            "I use AI coding tools like Claude Code to move fast<br>
-            without dropping quality or cutting corners."
+            "I use Claude Code to move faster, not to replace my own thinking.<br>
+            I lean on it to teach myself and stay on top of where AI is heading,<br>
+            so my skills keep pace instead of falling behind."
           </div>
         </div>
         <div class="about-details reveal reveal-delay-1">
           <div class="detail-card">
             <div class="detail-card-label">Education</div>
             <div class="detail-card-value">Trinity College Dublin</div>
-            <div class="detail-card-sub">B.Sc. Computer Engineering &nbsp;·&nbsp; II.1 (67%) &nbsp;·&nbsp; 2021–2025</div>
+            <div class="detail-card-sub">Bachelor's in Computer Engineering &nbsp;·&nbsp; II.1 (67%) &nbsp;·&nbsp; 2021–2025</div>
           </div>
           <div class="detail-card">
             <div class="detail-card-label">Location</div>
@@ -845,10 +902,10 @@
           <div class="detail-card">
             <div class="detail-card-label">Languages</div>
             <div class="langs">
-              <span class="lang-tag">English — Fluent</span>
-              <span class="lang-tag">Hindi — Native</span>
-              <span class="lang-tag">Marathi — Native</span>
-              <span class="lang-tag">German — A1</span>
+              <span class="lang-tag">English (Fluent)</span>
+              <span class="lang-tag">Hindi (Native)</span>
+              <span class="lang-tag">Marathi (Native)</span>
+              <span class="lang-tag">German (A1)</span>
             </div>
           </div>
         </div>
@@ -865,7 +922,7 @@
       <div class="exp-timeline">
 
         <div class="exp-item reveal">
-          <div class="exp-company">TestQ Technologies — United Kingdom (Remote)</div>
+          <div class="exp-company">TestQ Technologies · United Kingdom (Remote)</div>
           <div class="exp-role">Software Developer</div>
           <div class="exp-period">Nov 2025 – Present</div>
           <ul class="exp-bullets">
@@ -884,18 +941,18 @@
         </div>
 
         <div class="exp-item reveal reveal-delay-1">
-          <div class="exp-company">Decillion Digital — Leicester, United Kingdom (Hybrid)</div>
+          <div class="exp-company">Decillion Digital · Leicester, United Kingdom (Hybrid)</div>
           <div class="exp-role">Software Developer Intern</div>
           <div class="exp-period">May 2024 – Aug 2024</div>
           <ul class="exp-bullets">
             <li>Built an AI-powered CV parsing system using <strong>Python, Flask, PyMuPDF, and python-docx</strong> for automated data extraction from candidate documents.</li>
             <li>Designed and integrated <strong>RESTful APIs</strong> to connect with HR systems, removing dependency on third-party parsing services.</li>
             <li>Applied <strong>spaCy NLP, regular expressions, and geopy</strong> to accurately extract named entities, skills, and geographic data from CVs at scale.</li>
-            <li>Collaborated in <strong>Agile teams</strong> using Git-based version control and CI/CD practices for smooth delivery and deployment.</li>
+            <li>Collaborated in <strong>Agile teams</strong> using Git-based version control for smooth delivery and deployment.</li>
           </ul>
           <div class="exp-tags">
             <span class="exp-tag">Python</span><span class="exp-tag">Flask</span><span class="exp-tag">spaCy NLP</span>
-            <span class="exp-tag">REST APIs</span><span class="exp-tag">PyMuPDF</span><span class="exp-tag">CI/CD</span>
+            <span class="exp-tag">REST APIs</span><span class="exp-tag">PyMuPDF</span>
           </div>
         </div>
 
@@ -969,7 +1026,7 @@
 
         <div class="project-card project-highlight reveal">
           <div class="project-num">01</div>
-          <div class="project-name">PRANCER — Resume Parsing Platform</div>
+          <div class="project-name">PRANCER: Resume Parsing Platform</div>
           <div class="project-desc">Full production system built at TestQ Technologies. Replaced a commercial parser at 5% of the cost with 3x throughput. LLM-driven extraction, FastAPI backend, React frontend, deployed on AWS with full auth, HTTPS, staging gates, and pytest coverage.</div>
           <div class="project-stack">
             <span class="stack-tag">Python</span><span class="stack-tag">FastAPI</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">LLM</span><span class="stack-tag">React</span><span class="stack-tag">AWS EC2</span><span class="stack-tag">Docker</span>
@@ -1095,14 +1152,14 @@
         <div class="cert-card special reveal">
           <div class="cert-dot"></div>
           <div>
-            <div class="cert-name">NASA Space Apps Hackathon — Galactic Problem Solver 🏆</div>
+            <div class="cert-name">NASA Space Apps Hackathon, Galactic Problem Solver 🏆</div>
             <div class="cert-issuer">Team Antriksh · TUS Athlone · Oct 2023</div>
           </div>
         </div>
         <div class="cert-card special reveal reveal-delay-1">
           <div class="cert-dot"></div>
           <div>
-            <div class="cert-name">District Level Bronze Medal — Athletics 🥉</div>
+            <div class="cert-name">District Level Bronze Medal in Athletics 🥉</div>
             <div class="cert-issuer">Sports Achievement</div>
           </div>
         </div>
@@ -1160,13 +1217,6 @@
             <strong style="color: var(--accent2);">Notice Period</strong><br><br>
             Available immediately. No notice required.
           </div>
-          <br>
-          <div class="visa-note">
-            <strong>Target Salary</strong><br><br>
-            Backend / Software Engineer: <strong>€45,000 – €50,000</strong> base, flexible on full package.<br>
-            Graduate / IT roles: <strong>€30,000 – €38,000</strong>.<br>
-            Internships: <strong>€27,000 – €33,000</strong>.
-          </div>
         </div>
       </div>
     </div>
@@ -1216,7 +1266,7 @@
     });
 
     // ── Typed text effect on hero
-    const phrases = ['Backend Engineer.', 'Python Developer.', 'LLM Builder.', 'Cloud Deployer.'];
+    const phrases = ['Backend Engineer.', 'Python Developer.', 'AI Solutions Developer.', 'Cloud Deployer.'];
     let pi = 0, ci = 0, deleting = false;
     const target = document.querySelector('h1.hero-title .dim-line');
     if (target) {
