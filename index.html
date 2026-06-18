@@ -758,14 +758,19 @@
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .nav-links.open {
-        display: flex; flex-direction: column; gap: 1.5rem;
-        position: fixed; inset: 0;
-        background: rgba(10,10,12,0.97);
+        display: flex; flex-direction: column; gap: 2.2rem;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;            /* fallback for older browsers */
+        height: 100dvh;           /* true mobile viewport height */
+        background: rgba(10,10,12,0.98);
+        -webkit-backdrop-filter: blur(20px);
         backdrop-filter: blur(20px);
         justify-content: center; align-items: center;
         z-index: 100;
-        font-size: 1.1rem;
       }
+      .nav-links.open a { font-size: 1.15rem; }   /* bigger, easier to tap */
       .hamburger { display: flex; }
       section { padding: 4rem 1.5rem; }
       #hero { padding: 6rem 1.5rem 3rem; }
